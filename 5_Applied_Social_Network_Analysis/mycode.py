@@ -114,6 +114,53 @@ P.get_edge_data('A','C')['weight']
 nx.draw_networkx(B)
 bipartite.is_bipartite(B)
 
+'''
+WEEK2
+'''
+
+import networkx as nx
+
+G = nx.Graph()
+G.add_edges_from([('A','K'),('A','B'), ('A','C'),('B','C') ,('B','K'),('C','E'),('C','F'),('D','E'),
+                  ('E','F'),('E','H'),('F','G'),('I','J')])
+
+nx.clustering(G,'A')
+nx.clustering(G,'J')
+nx.average_clustering(G)
+
+G = nx.Graph()
+G.add_edges_from([('A','K'),('A','B'),('B','C') ,('B','K'),('C','E'),('C','F'),('D','E'),
+                  ('E','F'),('E','H'),('F','G'),('I','J'),('E','I')])
+
+nx.shortest_path(G,'A','H')
+nx.shortest_path_length(G,'A','H')
+nx.shortest_path_length(G,'E','J')
+
+T = nx.bfs_tree(G,'A')
+T.edges()
+
+nx.shortest_path_length(G,'A')
+nx.eccentricity(G)
+nx.radius(G)
+nx.periphery(G)
+nx.center(G)
+
+nx.is_connected(G)
+nx.number_connected_components(G)
+nx.connected_components(G)
+sorted(nx.connected_components(G))
+nx.node_connected_component(G,'A')
+
+G = nx.DiGraph()
+G.add_edges_from([('A','K'),('A','B'),('B','C') ,('B','K'),('C','E'),('C','F'),('D','E'),
+                  ('E','F'),('E','H'),('F','G'),('I','J'),('E','I')])
+nx.is_strongly_connected(G)
+nx.is_weakly_connected(G)
+sorted(nx.strongly_connected_components(G))
+sorted(nx.weakly_connected_components(G))
+
+
+
 
 
 
