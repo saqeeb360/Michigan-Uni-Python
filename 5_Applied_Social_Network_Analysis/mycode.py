@@ -159,15 +159,19 @@ nx.is_weakly_connected(G)
 sorted(nx.strongly_connected_components(G))
 sorted(nx.weakly_connected_components(G))
 
+#Network Robustness
+G = nx.Graph()
+G.add_edges_from([('A','K'),('A','B'),('B','C') ,('B','K'),('C','E'),('C','F'),('D','E'),
+                  ('E','F'),('E','H'),('F','G'),('I','J'),('E','I')])
+nx.node_connectivity(G)
+nx.minimum_node_cut(G)
+nx.edge_connectivity(G)
+nx.minimum_edge_cut(G)
 
-
-
-
-
-
-
-
-
+nx.node_connectivity(G,'A','D')
+nx.minimum_node_cut(G,'A','D')
+nx.edge_connectivity(G,'A','D')
+nx.minimum_edge_cut(G,'A','D')
 
 
 
