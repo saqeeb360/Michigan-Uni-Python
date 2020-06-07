@@ -173,28 +173,91 @@ nx.minimum_node_cut(G,'A','D')
 nx.edge_connectivity(G,'A','D')
 nx.minimum_edge_cut(G,'A','D')
 
+'''
+WEEK3
+'''
+import pandas as pd
+
+#Degree centrality
+G = nx.karate_club_graph()
+G.nodes()
+G = nx.convert_node_labels_to_integers(G, first_label = 1)
+nx.degree_centrality(G)
+pd.Series(nx.degree_centrality(G)).nlargest(n=5)
+
+#closeness centrality
+nx.closeness_centrality(G)
+pd.Series(nx.closeness_centrality(G)).nlargest(n=5)
+
+(len(G.nodes())-1)/sum(nx.shortest_path_length(G,32).values())
+
+sorted(nx.shortest_path_length(G,32).items(), key = lambda x : x[0])
+
+G = nx.Graph()
+G.add_edges_from([(1,2),(1,3),(2,3),(3,4),(4,5),(5,6),(5,7),(6,7)])
+nx.betweenness_centrality(G,normalized =False)
+
+G = nx.Graph()
+G.add_edges_from([(1,2),(2,3),(3,4),(2,4)])
+nx.betweenness_centrality(G,normalized = False)
 
 
+G = nx.karate_club_graph()
+G.nodes()
+G = nx.convert_node_labels_to_integers(G, first_label = 1)
+nx.betweenness_centrality(G)
+pd.Series(nx.betweenness_centrality(G, normalized = False)).nlargest(n=5)
+pd.Series(nx.betweenness_centrality(G)).nlargest(n=5)
+
+import operator
+sorted(nx.betweenness_centrality(G, normalized = False).items(), key = operator.itemgetter(1), reverse = True)[:5]
+
+pd.Series(nx.betweenness_centrality(G, normalized = False, k =10)).nlargest(n=5)
+
+pd.Series(nx.betweenness_centrality_subset(G,[34,33,30,21,16,27,15,23,10],[1,4,13,11,6,12,17,7],normalized = True)).nlargest(n=5)
+
+pd.Series(nx.edge_betweenness_centrality(G)).sort_values(ascending = False)[:5]
+pd.Series(nx.edge_betweenness_centrality(G)).nlargest()
+nx.edge_betweenness_centrality(G)
+
+pd.Series(nx.edge_betweenness_centrality_subset(G,[34,33,30,21,16,27,15,23,10],[1,4,13,11,6,12,17,7],normalized = True)).nlargest(n=5)
+
+# Page Rank
+
+pd.Series(nx.pagerank(G,)).nlargest(n=5)
+
+G = nx.DiGraph()
+g1 = [(word[0],word[1]) for word in 'AB BC CB BD DC DA DE EA'.split()]
+G.add_edges_from(g1)
+nx.pagerank(G)
+
+G = nx.DiGraph()
+g2 = [(word[0],word[1]) for word in 'AB BC CB BD DC DA DE EA BF FG GF BG'.split()]
+G.add_edges_from(g2)
+nx.pagerank(G, alpha = 0.8)
+
+pd.Series(nx.hits(G)[0]).nlargest(n=5)
+pd.Series(nx.hits(G)[1]).nlargest(n=5)
 
 
+'''
+QUIZ
+'''
+
+G = nx.Graph()
+G.add_edges_from([('A','B'),('B','D'),('A','C'),('C','D'),('C','E'),('D','E'),('D','G'),('E','G'),('G','F')])
+nx.degree_centrality(G)['D']
+nx.closeness_centrality(G)['G']
+nx.betweenness_centrality(G)['G']
+nx.betweenness_centrality(G, normalized = False)['G']
 
 
+(5)/(3*5)
+nx.edge_betweenness_centrality(G, normalized =False,)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+G = nx.DiGraph()
+G.add_edges_from([('B','A'),('A','B'),('A','C'),('C','D'),('D','C')])
+nx.pagerank(G,alpha = .95,max_iter = 100)['D']
 
 
 
